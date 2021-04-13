@@ -42,7 +42,7 @@ class Neighbourhood (models.Model):
 
     def delete_neighborhood(self):
         self.delete()
-class Business(models.Model):
+class Overview(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
     description = models.TextField(blank=True)
