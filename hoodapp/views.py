@@ -75,3 +75,13 @@ def post(request, hood_id):
     else:
         form = PostForm()
     return render(request, 'post.html', {'post': post,'form':form})
+    
+def search(request):
+    if request.method == 'GET':
+        name = request.GET.get("title")
+        searchresults = Business.objects.filter(name__icontains=name).all()
+        message = f'name'
+        return render(request, 'searchresults.html', {'searchresults': searchresults,'message': message  })
+    else:
+        message = "You haven't searched for any image category"
+    return render(request, "searchresults.html")
