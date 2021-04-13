@@ -59,3 +59,19 @@ def create_hoodz(request):
     else:
         form = NeighbourHoodForm()
     return render(request, 'newhoodz.html', {'form': form})
+
+
+def post(request, hood_id):
+    hood = Neighbourhood.objects.get(id=hood_id)
+    post = Post.objects.filter(neighbourhood=hood)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.neighbourhood = hood
+            form.user = request.user.profile
+            form.save()
+            return redirect('post', hood.id)
+    else:
+        form = PostForm()
+    return render(request, 'post.html', {'post': post,'form':form})
