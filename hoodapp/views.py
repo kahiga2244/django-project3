@@ -56,7 +56,8 @@ def mahoodz(request):
     mahoodz = Neighbourhood.objects.all()
     mahoodz = mahoodz[::-1]
    
-    return render(request, 'mitaa.html', {"mitaa":mitaa})
+    return render(request, 'mahoodz.html', {"mahoodz":mahoodz})
+
 def create_hood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -103,7 +104,7 @@ def post(request, hood_id):
 
 def business(request, hood_id):
     hood = Neighbourhood.objects.get(id=hood_id)
-    business = Business.objects.filter(neighbourhood=mtaa)
+    business = Business.objects.filter(neighbourhood=hood)
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():

@@ -55,6 +55,6 @@ User would like to:
 - To run the application, in your terminal
 
       $ python manage.py runserver
-      
+       
 ## Bugs
 There are no know bugs at the moment
