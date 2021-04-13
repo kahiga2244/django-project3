@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Profile, User
+from .models import Profile, User,Neighbourhood,Business,Post
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm,UpdateUserForm,NeighbourHoodForm
@@ -47,8 +47,17 @@ def edit_profile(request, username):
         prof_form = UpdateProfileForm(instance=request.user.profile)
     
     return render(request, 'edit_profile.html', {'user_form': user_form, 'prof_form': prof_form})
+def hood(request, hood_id):
+    hood = Neighbourhood.objects.get(id=hood_id)
 
-def create_hoodz(request):
+    return render(request, 'hoodz.html', {'hood':mtaa})
+
+def mahoodz(request):
+    mahoodz = Neighbourhood.objects.all()
+    mahoodz = mahoodz[::-1]
+   
+    return render(request, 'mitaa.html', {"mitaa":mitaa})
+def create_hood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
         if form.is_valid():
@@ -60,6 +69,22 @@ def create_hoodz(request):
         form = NeighbourHoodForm()
     return render(request, 'newhoodz.html', {'form': form})
 
+def join_hood(request, id):
+    neighbourhood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('mahoodz')
+
+def leave_hood(request, id):
+    request.user.profile.neighbourhood = None
+    request.user.profile.save()
+    return redirect('mahoodz')
+
+
+def hood_occupants(request, mtaa_id):
+    mtaa = Neighbourhood.objects.get(id=mtaa_id)
+    occupants = Profile.objects.filter(neighbourhood=mtaa)
+    return render(request, 'occupants.html', {'occupants': occupants})
 
 def post(request, hood_id):
     hood = Neighbourhood.objects.get(id=hood_id)

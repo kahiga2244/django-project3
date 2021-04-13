@@ -25,7 +25,7 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
-class Neighbourhood (models.Model):
+class Neighbourhood(models.Model):
     
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=60)
@@ -42,7 +42,7 @@ class Neighbourhood (models.Model):
 
     def delete_neighborhood(self):
         self.delete()
-       self.delete()
+       
 class Business(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
