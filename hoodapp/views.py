@@ -76,6 +76,22 @@ def post(request, hood_id):
         form = PostForm()
     return render(request, 'post.html', {'post': post,'form':form})
 
+def business(request, hood_id):
+    hood = Neighbourhood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighbourhood=mtaa)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.neighbourhood = hood
+            form.user = request.user.profile
+            form.save()
+            return redirect('business', hood.id)
+    else:
+        form = BusinessForm()
+    return render(request, 'business.html', {'business': business,'form':form})
+
+
 def search(request):
     if request.method == 'GET':
         name = request.GET.get("title")
@@ -85,3 +101,4 @@ def search(request):
     else:
         message = "You haven't searched for any image category"
     return render(request, "search.html")
+

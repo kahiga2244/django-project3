@@ -7,11 +7,15 @@ django-bootstrap4==3.0.0
 django-crispy-forms==1.11.2
 django-fontawesome-5==1.0.18
 fontawesome==5.10.1.post1
+gunicorn==20.1.0
 importlib-metadata==2.1.1
+psycopg2==2.8.6
+python-decouple==3.4
 pytz==2021.1
 six==1.15.0
 soupsieve==2.2.1
 sqlparse==0.4.1
 typing-extensions==3.7.4.3
 urllib3==1.26.4
+whitenoise==5.2.0
 zipp==3.4.1
