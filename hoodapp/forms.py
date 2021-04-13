@@ -27,7 +27,7 @@ class NeighbourHoodForm(forms.ModelForm):
         fields = ('picture', 'name', 'location','health','supermarket','police')
 class OverviewForm(forms.ModelForm):
     class Meta:
-        model = Business
+        model = Overview
         fields = ('name', 'email', 'description')
 
 class PostForm(forms.ModelForm):
