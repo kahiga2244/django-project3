@@ -11,7 +11,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=80, blank=True)
     location = models.CharField(max_length=50, blank=True, null=True)
     profile_picture = CloudinaryField('image')
-    neighbourhood = models.ForeignKey('Neighbourhood', on_delete=models.SET_NULL, null=True, related_name='occupant', blank=True)
+    # neighbourhood = models.ForeignKey('Neighbourhood', on_delete=models.SET_NULL, null=True, related_name='occupant', blank=True)
 
     def __str__(self):
         return f'{self.user.username} profile'
