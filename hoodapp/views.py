@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile, User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm,UpdateUserForm
+from .forms import RegisterForm,UpdateUserForm,NeighbourHoodForm
 # Create your views here.
 @login_required(login_url='login')
 def index(request):
@@ -52,9 +52,9 @@ def create_hoodz(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
         if form.is_valid():
-            mtaa = form.save(commit=False)
-            mtaa.admin = request.user.profile
-            mtaa.save()
+            hood = form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save()
             return redirect('mahoodz')
     else:
         form = NeighbourHoodForm()
