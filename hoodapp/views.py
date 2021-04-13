@@ -46,5 +46,16 @@ def edit_profile(request, username):
         user_form = UpdateUserForm(instance=request.user)
         prof_form = UpdateProfileForm(instance=request.user.profile)
     
-    return render(request, 'editprofile.html', {'user_form': user_form, 'prof_form': prof_form})
+    return render(request, 'edit_profile.html', {'user_form': user_form, 'prof_form': prof_form})
 
+def create_hoodz(request):
+    if request.method == 'POST':
+        form = NeighbourHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            mtaa = form.save(commit=False)
+            mtaa.admin = request.user.profile
+            mtaa.save()
+            return redirect('mahoodz')
+    else:
+        form = NeighbourHoodForm()
+    return render(request, 'newhoodz.html', {'form': form})
